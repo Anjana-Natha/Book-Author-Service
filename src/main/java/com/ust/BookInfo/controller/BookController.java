@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
+import java.util.List;
+
 @RequestMapping("/book")
 @RestController
 public class BookController {
@@ -13,24 +16,25 @@ public class BookController {
     @Autowired
     private BookRepository bookRepository;
 
+
     @PostMapping("/add")
-   public Book addBook(Book book){
+   public Book addBook(@RequestBody Book book){
         return bookRepository.save(book);
    }
 
    @GetMapping("/allbooks")
-    public ResponseEntity<?> getAllBooks(){
-        return ResponseEntity.ok(bookRepository.findAll());
+   public List<Book> getAllBooks() {
+       return this.bookRepository.findAll();
    }
 
-   @GetMapping("/bookbyid")
-    public ResponseEntity<?> getBookById(long id){
-        return ResponseEntity.ok(bookRepository.findById(id));
+   @GetMapping("/bookbyid/{bid}")
+   public Book getABooks(@PathVariable long bid) {
+       return this.bookRepository.findById(bid).get();
    }
-
-   @DeleteMapping("/delete")
-    public ResponseEntity<Book> deleteBook(long id){
+   @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Book> deleteBook(@PathVariable long id){
         bookRepository.deleteById(id);
         return ResponseEntity.ok().build();
    }
+    
 }
