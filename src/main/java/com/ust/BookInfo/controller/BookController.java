@@ -18,23 +18,28 @@ public class BookController {
 
 
     @PostMapping("/add")
-   public Book addBook(@RequestBody Book book){
+    public Book addBook(@RequestBody Book book) {
         return bookRepository.save(book);
-   }
+    }
 
-   @GetMapping("/allbooks")
-   public List<Book> getAllBooks() {
-       return this.bookRepository.findAll();
-   }
+    @GetMapping("/allbooks")
+    public List<Book> getAllBooks() {
+        return this.bookRepository.findAll();
+    }
 
-   @GetMapping("/bookbyid/{bid}")
-   public Book getABooks(@PathVariable long bid) {
-       return this.bookRepository.findById(bid).get();
-   }
-   @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Book> deleteBook(@PathVariable long id){
+    @GetMapping("/bookbyid/{bid}")
+    public Book getABooks(@PathVariable long bid) {
+        return this.bookRepository.findById(bid).get();
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Book> deleteBook(@PathVariable long id) {
         bookRepository.deleteById(id);
         return ResponseEntity.ok().build();
-   }
-    
+    }
+
+    @GetMapping("author/{authorId}")
+    public List<Book> getBooksByAuthorId(@PathVariable int authorId) {
+        return bookRepository.findByAuthorId(authorId);
+    }
 }

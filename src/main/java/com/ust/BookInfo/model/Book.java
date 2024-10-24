@@ -1,14 +1,15 @@
 package com.ust.BookInfo.model;
 
-import jakarta.persistence.*;
+
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 
-@Entity
-@Table(name="BookDetails")
+@Document
+
 public class Book {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+
     private long bookId;
     private String bookName;
     private double bookPrice;
