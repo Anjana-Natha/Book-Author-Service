@@ -1,6 +1,7 @@
 package com.ust.BookInfo.model;
 
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
@@ -8,9 +9,8 @@ import java.time.LocalDate;
 @Document
 
 public class Book {
-
-
-    private long bookId;
+    @Id
+    private String bookId;
     private String bookName;
     private double bookPrice;
     private LocalDate publishedDate;
@@ -19,7 +19,7 @@ public class Book {
     public Book() {
     }
 
-    public Book(long bookId, String bookName, double bookPrice, LocalDate publishedDate, int authorId) {
+    public Book(String bookId, String bookName, double bookPrice, LocalDate publishedDate, int authorId) {
         this.bookId = bookId;
         this.bookName = bookName;
         this.bookPrice = bookPrice;
@@ -27,11 +27,11 @@ public class Book {
         this.authorId = authorId;
     }
 
-    public long getBookId() {
+    public String getBookId() {
         return bookId;
     }
 
-    public void setBookId(int bookId) {
+    public void setBookId(String bookId) {
         this.bookId = bookId;
     }
 
